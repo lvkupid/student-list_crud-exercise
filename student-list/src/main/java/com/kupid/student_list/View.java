@@ -4,17 +4,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
-import java.awt.CardLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.HeadlessException;
-import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
-import javax.swing.BoxLayout;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -130,5 +123,9 @@ public class View extends JFrame {
 			}
 		));
 		panel_1.add(table);
+		
+		Alumnos objAlu = new Alumnos();
+		objAlu.ListStudents(table);
+		
 	}
 }
