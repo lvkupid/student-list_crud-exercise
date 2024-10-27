@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTable;
@@ -27,9 +28,9 @@ public class View extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JLabel lblId;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtId;
+	private JTextField txtLastName;
+	private JTextField txtName;
 
 	/**
 	 * Launch the application.
@@ -46,11 +47,14 @@ public class View extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
 	public View() {
+		
+		DatabaseConnection obj = new DatabaseConnection();
+		obj.connect();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 383);
 		contentPane = new JPanel();
@@ -69,10 +73,10 @@ public class View extends JFrame {
 		lblId.setBounds(20, 45, 104, 14);
 		panel.add(lblId);
 		
-		textField = new JTextField();
-		textField.setBounds(92, 42, 86, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtId = new JTextField();
+		txtId.setBounds(92, 42, 86, 20);
+		panel.add(txtId);
+		txtId.setColumns(10);
 		
 		JLabel lblName = new JLabel("Name:");
 		lblName.setBounds(20, 87, 86, 14);
@@ -82,19 +86,21 @@ public class View extends JFrame {
 		lblLastname.setBounds(20, 136, 60, 14);
 		panel.add(lblLastname);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(92, 133, 86, 20);
-		textField_1.setColumns(10);
-		panel.add(textField_1);
+		txtLastName = new JTextField();
+		txtLastName.setBounds(92, 133, 86, 20);
+		txtLastName.setColumns(10);
+		panel.add(txtLastName);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(92, 84, 86, 20);
-		textField_2.setColumns(10);
-		panel.add(textField_2);
+		txtName = new JTextField();
+		txtName.setBounds(92, 84, 86, 20);
+		txtName.setColumns(10);
+		panel.add(txtName);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Alumnos objStudent = new Alumnos();
+				objStudent.InsertStudent(txtName, txtLastName);
 			}
 		});
 		btnSave.setBounds(39, 193, 119, 23);
