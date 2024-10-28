@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
@@ -14,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class View extends JFrame {
 
@@ -94,6 +97,7 @@ public class View extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Alumnos objStudent = new Alumnos();
 				objStudent.InsertStudent(txtName, txtLastName);
+				objStudent.ListStudents(table);
 			}
 		});
 		btnSave.setBounds(39, 193, 119, 23);
@@ -114,7 +118,14 @@ public class View extends JFrame {
 		panel_1.setLayout(null);
 		
 		table = new JTable();
-		table.setBounds(10, 21, 460, 290);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Alumnos objStudent = new Alumnos();
+				objStudent.SelectStudent(table, txtId, txtName, txtLastName);
+			}
+		});
+		table.setBounds(10, 83, 460, 228);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -122,10 +133,15 @@ public class View extends JFrame {
 			new String[] {
 			}
 		));
-		panel_1.add(table);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(10, 21, 460, 290);
+		panel_1.add(scrollPane);
 		
-		Alumnos objAlu = new Alumnos();
-		objAlu.ListStudents(table);
+		Alumnos objStudent = new Alumnos();
+		objStudent.ListStudents(table);
 		
+		txtId.setEnabled(false);
+		this.setLocationRelativeTo(null);
 	}
 }

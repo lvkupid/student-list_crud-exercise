@@ -66,7 +66,10 @@ public class Alumnos {
 	public void ListStudents(JTable studentsTable) {
 		
 		DatabaseConnection con = new DatabaseConnection();
+		
+		//CREO el modelo VACÍO de la tabla a incorporar
 		DefaultTableModel model = new DefaultTableModel();
+		
 		
 		TableRowSorter<TableModel> orderTable = new TableRowSorter<TableModel>(model);
 		studentsTable.setRowSorter(orderTable);
@@ -100,6 +103,22 @@ public class Alumnos {
 			JOptionPane.showMessageDialog(null, "LISTTABLE Error: " + e.toString());
 		}
 		
+	}
+	
+	public void SelectStudent(JTable studentsTable, JTextField id, JTextField name, JTextField last) {
+		try {
+			int row = studentsTable.getSelectedRow();
+			if(row >= 0) {
+				id.setText(studentsTable.getValueAt(row, 0).toString());
+				name.setText(studentsTable.getValueAt(row, 1).toString());
+				last.setText(studentsTable.getValueAt(row, 2).toString());
+			}else {
+				JOptionPane.showMessageDialog(null, "No row selected");
+			}
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Selection error: " + e.toString());
+		}
 	}
 	
 }
