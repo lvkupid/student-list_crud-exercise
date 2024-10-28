@@ -104,10 +104,24 @@ public class View extends JFrame {
 		panel.add(btnSave);
 		
 		JButton btnModify = new JButton("Modify");
+		btnModify.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Alumnos objStudent = new Alumnos();
+				objStudent.ModifyStudent(txtId, txtName, txtLastName);
+				objStudent.ListStudents(table);
+			}
+		});
 		btnModify.setBounds(39, 227, 119, 23);
 		panel.add(btnModify);
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Alumnos objStudent = new Alumnos();
+				objStudent.DeleteStudent(txtId);
+				objStudent.ListStudents(table);
+			}
+		});
 		btnDelete.setBounds(39, 263, 119, 23);
 		panel.add(btnDelete);
 		

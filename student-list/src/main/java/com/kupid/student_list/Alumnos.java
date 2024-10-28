@@ -121,4 +121,45 @@ public class Alumnos {
 		}
 	}
 	
+	public void ModifyStudent(JTextField id, JTextField name, JTextField last) {
+		setId(Integer.parseInt(id.getText()));
+		setStudentName(name.getText());
+		setStudentLastName(last.getText());
+		
+		DatabaseConnection con = new DatabaseConnection();
+		
+		String query = "UPDATE students_list SET name = ?, lastname = ? WHERE id = ?;";
+		
+		try {
+			CallableStatement cs = con.connect().prepareCall(query);
+			cs.setString(1, getStudentName());
+			cs.setString(2, getStudentLastName());
+			cs.setInt(3, getId());
+			
+			cs.execute();
+			JOptionPane.showMessageDialog(null, "Modification success.");
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Couldn't MODIFY: " + e);
+		}
+		
+	}
+	
+	public void DeleteStudent(JTextField id) {
+		setId(Integer.parseInt(id.getText()));
+		DatabaseConnection con = new DatabaseConnection();
+		String query = "DELETE from students_list WHERE id = ?;";
+		
+		try {
+			CallableStatement cs = con.connect().prepareCall(query);
+			cs.setInt(1, getId());
+			cs.execute();
+			JOptionPane.showMessageDialog(null, "DELETE success.");
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Couldn't DELETE: " + e);
+		}
+		
+	}
+	
 }
